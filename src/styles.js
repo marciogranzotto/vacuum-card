@@ -101,7 +101,7 @@ export default css`
   .vacuum {
     display: block;
     max-width: 90%;
-    max-height: 200px;
+    max-height: 120px;
     image-rendering: crisp-edges;
     margin: 30px auto 20px auto;
   }
