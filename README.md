@@ -107,7 +107,7 @@ Here is what every option means:
 | `image`        | `string`  | `default`    | Path to image of your vacuum cleaner. Better to have `png` or `svg`.    |
 | `show_name`    | `boolean` | `true`       | Show friendly name of the vacuum.                                       |
 | `show_toolbar` | `boolean` | `true`       | Show toolbar with actions.                                              |
-| `stats`        | `object`  | Optional     | Custom per state stats for your bacuum cleaner                          |
+| `stats`        | `object`  | Optional     | Custom per state stats for your vacuum cleaner                          |
 | `actions`      | `object`  | Optional     | Custom actions for your vacuum cleaner.                                 |
 
 ### `stats` object
@@ -116,9 +116,11 @@ Here is what every option means:
 | ----------- | :------: | -------- | ----------------------------------------------- |
 | `attribute` | `string` | Optional | Attribute name of the stat, i.e. `filter_left`. |
 | `unit`      | `string` | Optional | Unit of measure, i.e. `hours`.                  |
-| `subtitle`  | `string` | Optional | Firendly name of the stat, i.e. `Filter`.       |
+| `subtitle`  | `string` | Optional | Friendly name of the stat, i.e. `Filter`.       |
 
 ### `actions` object
+
+You can defined [custom scripts][ha-scripts] for custom actions i.e cleaning specific room and add them to this card with `actions` option.
 
 | Name           |   Type   | Default                           | Description                                        |
 | -------------- | :------: | --------------------------------- | -------------------------------------------------- |
@@ -141,6 +143,12 @@ This card supports translations. Please, help to add more translations and impro
 
 - English
 - Українська (Ukrainian)
+- Deutsche (German)
+- Français (French)
+- Italiano (Italian)
+- Nederlandse (Dutch)
+- Polski (Polish)
+- Русский (Russian)
 - [_Your language?_][add-translation]
 
 ## Supported models
@@ -152,7 +160,9 @@ If this card works with your vacuum cleaner, please open a PR and your model to 
 - Roborock S6
 - Roborock S5
 - Roborock S5 Max
+- Roborock S50
 - Roborock S4
+- Roborock E25
 - Xiaomi Mi Robot (STYJ02YM)
 - Xiaomi Mi Robot 1S
 - Roomba 675
@@ -201,6 +211,7 @@ MIT © [Denys Dovhan][denysdovhan]
 [cleaning-gif]: https://user-images.githubusercontent.com/3459374/81119202-fa60b500-8f32-11ea-9b23-325efa93d7ab.gif
 [returning-gif]: https://user-images.githubusercontent.com/3459374/81119452-765afd00-8f33-11ea-9dc5-9c26ba3f8c45.gif
 [latest-release]: https://github.com/denysdovhan/vacuum-card/releases/latest
+[ha-scripts]: https://www.home-assistant.io/docs/scripts/
 [edit-readme]: https://github.com/denysdovhan/vacuum-card/edit/master/README.md
 [add-translation]: https://github.com/denysdovhan/vacuum-card/tree/master/src/translations
 [macbury-smart-house]: https://macbury.github.io/SmartHouse/HomeAssistant/Vacuum/

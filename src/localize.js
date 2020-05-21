@@ -3,10 +3,22 @@
 
 import * as en from './translations/en.json';
 import * as uk from './translations/uk.json';
+import * as nl from './translations/nl.json';
+import * as de from './translations/de.json';
+import * as fr from './translations/fr.json';
+import * as pl from './translations/pl.json';
+import * as it from './translations/it.json';
+import * as ru from './translations/ru.json';
 
 var languages = {
   en,
   uk,
+  nl,
+  de,
+  fr,
+  pl,
+  it,
+  ru
 };
 
 const DEFAULT_LANG = 'en';
@@ -14,7 +26,7 @@ const DEFAULT_LANG = 'en';
 export default function localize(string, search, replace) {
   const [section, key] = string.split('.');
 
-  const lang = (localStorage.getItem('selectedLanguage') || DEFAULT_LANG)
+  const lang = (localStorage.getItem('selectedLanguage') || navigator.language.split('-')[0] || DEFAULT_LANG)
     .replace(/['"]+/g, '')
     .replace('-', '_');
 

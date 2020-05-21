@@ -161,7 +161,7 @@ export default css`
   .vacuum-name {
     text-align: center;
     font-weight: bold;
-    margin: 20px auto;
+    margin: 10px auto 20px;
     color: var(--text-primary-color);
     font-size: 16px;
   }
@@ -202,20 +202,20 @@ export default css`
     justify-content: space-evenly;
   }
 
-  .toolbar paper-icon-button {
+  .toolbar ha-icon-button {
     color: var(--paper-item-icon-color);
     flex-direction: column;
     width: 44px;
     height: 44px;
+    --mdc-icon-button-size: 44px;
     margin: 5px 0;
-    padding: 10px;
   }
 
-  .toolbar paper-icon-button:first-child {
+  .toolbar ha-icon-button:first-child {
     margin-left: 5px;
   }
 
-  .toolbar paper-icon-button:last-child {
+  .toolbar ha-icon-button:last-child {
     margin-right: 5px;
   }
 
@@ -227,7 +227,7 @@ export default css`
     cursor: pointer;
   }
 
-  .toolbar paper-icon-button:active,
+  .toolbar ha-icon-button:active,
   .toolbar paper-button:active {
     opacity: 0.4;
     background: rgba(0, 0, 0, 0.1);

@@ -5,6 +5,13 @@ import localize from './localize';
 import styles from './styles';
 import defaultImage from './vacuum.png';
 
+if (!customElements.get('ha-icon-button')) {
+  customElements.define(
+    'ha-icon-button',
+    class extends customElements.get('paper-icon-button') {},
+  );
+}
+
 class VacuumCard extends LitElement {
   static get properties() {
     return {
@@ -64,6 +71,14 @@ class VacuumCard extends LitElement {
     }
 
     return this.config.show_toolbar;
+  }
+
+  get compactView() {
+    if (this.config.compact_view === undefined) {
+      return false;
+    }
+
+    return this.config.compact_view;
   }
 
   setConfig(config) {
@@ -163,33 +178,39 @@ class VacuumCard extends LitElement {
 
     const selected = sources.indexOf(source);
 
-    return html` <paper-menu-button
-      slot="dropdown-trigger"
-      .horizontalAlign=${'right'}
-      .verticalAlign=${'top'}
-      .verticalOffset=${40}
-      .noAnimations=${true}
-      @click="${(e) => e.stopPropagation()}"
-    >
-      <paper-button class="source-menu__button" slot="dropdown-trigger">
-        <span class="source-menu__source" show=${true}>
-          ${source}
-        </span>
-        <ha-icon icon="mdi:fan"></ha-icon>
-      </paper-button>
-      <paper-listbox
-        slot="dropdown-content"
-        selected=${selected}
-        @click="${(e) => this.handleSpeed(e)}"
+    return html`
+      <paper-menu-button
+        slot="dropdown-trigger"
+        .horizontalAlign=${'right'}
+        .verticalAlign=${'top'}
+        .verticalOffset=${40}
+        .noAnimations=${true}
+        @click="${(e) => e.stopPropagation()}"
       >
-        ${sources.map(
-          (item) => html`<paper-item value=${item}>${item}</paper-item>`
-        )}
-      </paper-listbox>
-    </paper-menu-button>`;
+        <paper-button class="source-menu__button" slot="dropdown-trigger">
+          <span class="source-menu__source" show=${true}>
+            ${localize(`source.${source}`) || source}
+          </span>
+          <ha-icon icon="mdi:fan"></ha-icon>
+        </paper-button>
+        <paper-listbox
+          slot="dropdown-content"
+          selected=${selected}
+          @click="${(e) => this.handleSpeed(e)}"
+        >
+          ${sources.map(
+            (item) => html`<paper-item value=${item}>${localize(`source.${item}`) || item}</paper-item>`
+          )}
+        </paper-listbox>
+      </paper-menu-button>
+    `;
   }
 
   renderMapOrImage(state) {
+    if (this.compactView) {
+      return html``;
+    }
+
     if (this.map) {
       return html` <img class="map" src="${this.mapUrl}" /> `;
     }
@@ -295,40 +316,40 @@ class VacuumCard extends LitElement {
             const [domain, name] = service.split('.');
             this.hass.callService(domain, name, service_data);
           };
-          return html`<paper-icon-button
+          return html`<ha-icon-button
             icon="${icon}"
             title="${name}"
             @click="${execute}"
-          ></paper-icon-button>`;
+          ></ha-icon-button>`;
         });
 
         const dockButton = html`
-          <paper-icon-button
+          <ha-icon-button
             icon="hass:home-map-marker"
             title="${localize('common.return_to_base')}"
             class="toolbar-icon"
             @click="${() => this.callService('return_to_base')}"
           >
-          </paper-icon-button>
+          </ha-icon-button>
         `;
 
         return html`
           <div class="toolbar">
-            <paper-icon-button
+            <ha-icon-button
               icon="hass:play"
               title="${localize('common.start')}"
               class="toolbar-icon"
               @click="${() => this.callService('start')}"
             >
-            </paper-icon-button>
+            </ha-icon-button>
 
-            <paper-icon-button
+            <ha-icon-button
               icon="mdi:crosshairs-gps"
               title="${localize('common.locate')}"
               class="toolbar-split"
               @click="${() => this.callService('locate')}"
             >
-            </paper-icon-button>
+            </ha-icon-button>
 
             ${state === 'idle' ? dockButton : ''}
             <div class="fill-gap"></div>
